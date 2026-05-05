@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2b2a2a"
+    android:visibility="visible"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="410dp"
+        android:layout_height="284dp"
+        android:layout_marginTop="591dp"
+
+        android:background="@drawable/bg_card"
+        android:orientation="vertical"
+        android:padding="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/imagemLogo"
+        android:layout_width="500dp"
+        android:layout_height="370dp"
+        android:layout_marginTop="100dp"
+
+        android:src="@drawable/logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.192" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="289dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="100dp"
+        android:fontFamily="@font/poppins_light"
+        android:text="Seja você o critico de cinema "
+        android:textColor="#FFE2E2"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imagemLogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imagemLogo" />
+
+    <Button
+        android:id="@+id/rosa"
+        android:layout_width="310dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="150dp"
+        android:background="@drawable/straight_button_rosa"
+        android:backgroundTint="@null"
+        android:text="Entrar"
+        android:fontFamily="@font/poppins_light"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout" />
+
+    <Button
+        android:id="@+id/azul_acinzentado"
+        android:layout_width="310dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="150dp"
+        android:fontFamily="@font/poppins_light"
+        android:background="@drawable/straight_button_azul_acinzentado"
+        android:backgroundTint="@null"
+        android:text="Cadastrar"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rosa" />
+
+    <TextView
+        android:textColor="@color/white"
+        android:id="@+id/skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:fontFamily="@font/poppins_light"
+        android:text="Pular para início"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/azul_acinzentado" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
