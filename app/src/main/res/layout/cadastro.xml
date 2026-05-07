@@ -38,9 +38,9 @@
             android:layout_height="20dp"
             android:fontFamily="@font/poppins_light"
             android:layout_marginTop="20dp"
-            android:text="usuário"
+            android:text="Usuário"
             android:textColor="#944264"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/inputusuario"
@@ -50,17 +50,18 @@
             android:hint="Digite seu nome de usuário"
             android:textColor="#000000"
             android:textColorHint="#96846a"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/email"
             android:layout_width="wrap_content"
             android:layout_height="31dp"
             android:fontFamily="@font/poppins_light"
-            android:text="email"
-            android:layout_marginTop="50dp"
+            android:text="Email"
+            android:layout_marginTop="15dp"
             android:textColor="#944264"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/inputemail"
@@ -75,6 +76,7 @@
             android:singleLine="true"
             android:minHeight="48dp"
             android:paddingBottom="2dp"
+            android:textSize="14sp"
             />
 
         <TextView
@@ -83,9 +85,9 @@
             android:layout_height="20dp"
             android:fontFamily="@font/poppins_light"
             android:layout_marginTop="20dp"
-            android:text="senha"
+            android:text="Senha"
             android:textColor="#944264"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/inputEmail"
@@ -95,7 +97,8 @@
             android:hint="Digite sua senha"
             android:textColor="#000000"
             android:textColorHint="#96846a"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/csenha"
@@ -103,47 +106,64 @@
             android:layout_height="20dp"
             android:fontFamily="@font/poppins_light"
             android:layout_marginTop="20dp"
-            android:text="Confirm senha"
+            android:text="Confirme sua senha"
             android:textColor="#944264"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/inputEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#000000"
-            android:hint="Digite seu email"
+            android:hint="Digite sua senha novamente"
             android:textColor="#000000"
             android:textColorHint="#96846a"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:textSize="14sp"/>
 
         <Button
-            android:id="@+id/bottonlogin"
+            android:id="@+id/bottoncadastro"
             android:layout_width="190dp"
             android:layout_height="42dp"
             android:layout_marginBottom="150dp"
             android:background="@drawable/login_button"
             android:backgroundTint="@null"
             android:fontFamily="@font/poppins_light"
-            android:text="@string/Entrar"
+            android:text="cadastrar"
             app:backgroundTint="@null"
             app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
             app:layout_constraintEnd_toEndOf="@+id/linearLayout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/linearLayout"
             android:layout_marginStart="85dp"
-            android:layout_marginTop="40dp"/>
+            android:layout_marginTop="20dp"/>
 
         <TextView
-            android:id="@+id/login"
+            android:id="@+id/cadastro"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:layout_marginStart="140dp"
-            android:layout_marginTop="-130dp"
+            android:layout_marginStart="115dp"
+            android:layout_marginTop="-140dp"
             android:fontFamily="@font/poppins_light"
-            android:text="Ou entre com"
+            android:text="Ou cadrastre-se com"
             android:textColor="#000000"
             android:textSize="12sp" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/google"
+            android:layout_marginTop="1dp"
+            android:layout_marginStart="145dp"/>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:src="@drawable/facebook"
+            android:layout_marginTop="-36dp"
+            android:layout_marginStart="190dp"/>
+
 
     </LinearLayout>
 
