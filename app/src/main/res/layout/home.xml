@@ -105,136 +105,16 @@
                 android:textStyle="bold" />
 
             <!-- SCROLL HORIZONTAL -->
-            <!-- SCROLL HORIZONTAL -->
-            <HorizontalScrollView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/trendingMovies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                android:scrollbars="none">
+                android:scrollbars="none"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <!-- CARD 1 -->
-                    <LinearLayout
-                        android:layout_width="110dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="12dp"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="110dp"
-                            android:layout_height="150dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/mammamia" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:text="Mamma Mia"
-                            android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
-
-                    </LinearLayout>
-
-                    <!-- CARD 2 -->
-                    <LinearLayout
-                        android:layout_width="110dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="12dp"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="110dp"
-                            android:layout_height="150dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/spiderman" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:text="Spider-Man"
-                            android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
-
-                    </LinearLayout>
-
-                    <!-- CARD 3 -->
-                    <LinearLayout
-                        android:layout_width="110dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="12dp"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="110dp"
-                            android:layout_height="150dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/harrypotter" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:text="Harry Potter"
-                            android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
-
-                    </LinearLayout>
-
-                    <!-- CARD 4 -->
-                    <LinearLayout
-                        android:layout_width="110dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="12dp"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="110dp"
-                            android:layout_height="150dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/spiderman" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:text="Zootopia"
-                            android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
-
-                    </LinearLayout>
-
-                    <!-- CARD 5 -->
-                    <LinearLayout
-                        android:layout_width="110dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="12dp"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="110dp"
-                            android:layout_height="150dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/harrypotter" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:text="O Diabo Veste Prada"
-                            android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </HorizontalScrollView>
+            </androidx.recyclerview.widget.RecyclerView>
 
             <!-- PRIMEIRA AVALIAÇÃO -->
             <LinearLayout

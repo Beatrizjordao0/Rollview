@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RollView">
+        <uses-permission android:name="android.permission.INTERNET" />
 
         <activity android:name=".LoginActivity"/>
         <activity android:name=".SignupActivity"/>

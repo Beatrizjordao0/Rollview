@@ -43,4 +43,11 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.ext.junit)
+
+    // Retrofit (Para consumir a API)
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    // Gson (Para converter o JSON da API)
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    // Glide (Para carregar as imagens da internet)
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 }
