@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">RollView</string>
-    <string name="cadastrar">Cadastrar</string>
-    <string name="Entrar">Entrar</string>
+    <string name="signup">Sign Up</string>
+    <string name="login">Login</string>
     <string name="skip">Pular para início</string>
     <string name="tema">Seja você o critico de cinema</string>
     <string name="logo">Logo</string>

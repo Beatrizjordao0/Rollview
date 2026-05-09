@@ -55,14 +55,14 @@
         app:layout_constraintTop_toTopOf="@+id/imagemLogo" />
 
     <Button
-        android:id="@+id/rosa"
+        android:id="@+id/login"
         android:layout_width="310dp"
-        android:layout_height="42dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="150dp"
         android:background="@drawable/straight_button_rosa"
         android:backgroundTint="@null"
-        android:text="@string/Entrar"
         android:fontFamily="@font/poppins_light"
+        android:text="@string/login"
         app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout"
@@ -70,19 +70,20 @@
         app:layout_constraintTop_toTopOf="@+id/linearLayout" />
 
     <Button
-        android:id="@+id/azul_acinzentado"
+        android:id="@+id/signup"
         android:layout_width="310dp"
-        android:layout_height="42dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="150dp"
-        android:fontFamily="@font/poppins_light"
         android:background="@drawable/straight_button_azul_acinzentado"
         android:backgroundTint="@null"
-        android:text="@string/cadastrar"
+        android:fontFamily="@font/poppins_light"
+        android:text="@string/signup"
         app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rosa" />
+        app:layout_constraintTop_toBottomOf="@+id/login" />
 
     <TextView
         android:textColor="@color/white"
@@ -97,7 +98,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/azul_acinzentado" />
+        app:layout_constraintTop_toBottomOf="@+id/signup" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

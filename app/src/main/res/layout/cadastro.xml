@@ -30,7 +30,12 @@
             android:fontFamily="@font/poppins_light"
             android:text="Junte-se à nós"
             android:textColor="#944264"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <TextView
             android:id="@+id/usuario"
@@ -124,30 +129,34 @@
         <Button
             android:id="@+id/bottoncadastro"
             android:layout_width="190dp"
-            android:layout_height="42dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="85dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="150dp"
             android:background="@drawable/login_button"
             android:backgroundTint="@null"
             android:fontFamily="@font/poppins_light"
-            android:text="cadastrar"
+            android:text="Sign Up"
             app:backgroundTint="@null"
             app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
             app:layout_constraintEnd_toEndOf="@+id/linearLayout"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/linearLayout"
-            android:layout_marginStart="85dp"
-            android:layout_marginTop="20dp"/>
+            app:layout_constraintTop_toTopOf="@+id/linearLayout" />
 
         <TextView
             android:id="@+id/cadastro"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="115dp"
             android:layout_marginTop="-140dp"
             android:fontFamily="@font/poppins_light"
             android:text="Ou cadrastre-se com"
             android:textColor="#000000"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <ImageView
             android:layout_width="25dp"
