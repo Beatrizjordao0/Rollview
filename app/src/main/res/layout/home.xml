@@ -26,10 +26,7 @@
     </LinearLayout>
 
     <!-- BOTTOM NAVIGATION -->
-    <!-- IMPORTANTE:
-         NO BottomNavigationView NÃO deve existir TextView dentro dele.
-         Os textos e ícones vêm do arquivo menu/bottom_menu.xml
-    -->
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
@@ -65,8 +62,8 @@
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPagerShowcase"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp" />
+                android:layout_height="280dp"
+                android:layout_marginBottom="20dp"/>
 
             <!-- TÍTULO -->
             <TextView

@@ -1,10 +1,13 @@
 package com.example.rollview;
 
 import android.os.Bundle;
+import android.os.Handler; // Importação para o cronômetro
+import android.util.Log;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2; // Importação do ViewPager
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,58 +21,96 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HomeActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+    private ViewPager2 viewPagerShowcase;
+
     private MovieAdapter adapter;
+    private ShowcaseAdapter showcaseAdapter;
+
     private List<Movie> movieList = new ArrayList<>();
+
+    //  Carrossel
+    private Handler sliderHandler = new Handler();
+    private Runnable sliderRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if (viewPagerShowcase.getAdapter() != null) {
+                int nextItem = viewPagerShowcase.getCurrentItem() + 1;
+                // Se chegou no último, volta pro primeiro
+                if (nextItem >= viewPagerShowcase.getAdapter().getItemCount()) {
+                    nextItem = 0;
+                }
+                viewPagerShowcase.setCurrentItem(nextItem, true);
+            }
+            // Repete essa ação a cada 3000 milissegundos (3 segundos)
+            sliderHandler.postDelayed(this, 3000);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
 
+        // Lista Horizontal de Baixo
         recyclerView = findViewById(R.id.trendingMovies);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-
         adapter = new MovieAdapter(movieList);
         recyclerView.setAdapter(adapter);
 
-        // Chama a função que vai na internet buscar os dados
+        viewPagerShowcase = findViewById(R.id.viewPagerShowcase);
+        showcaseAdapter = new ShowcaseAdapter(movieList);
+        viewPagerShowcase.setAdapter(showcaseAdapter);
+
+        // Chama a API
         fetchMoviesFromApi();
     }
 
     private void fetchMoviesFromApi() {
-        // Configura o Retrofit (o motor que faz o download)
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.themoviedb.org/3/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         TmdbApi api = retrofit.create(TmdbApi.class);
-
         String apiKey = "a83c1caa03c2bc3241bc62845df9e242";
 
-        // Prepara a chamada passando a chave e o idioma (Português)
         Call<MovieResponse> call = api.getPopularMovies(apiKey, "pt-BR");
 
-        // Executa o download em segundo plano para não travar o app
         call.enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    // Limpa a lista vazia e adiciona os filmes que chegaram da internet!
                     movieList.clear();
                     movieList.addAll(response.body().getResults());
 
                     adapter.notifyDataSetChanged();
+                    showcaseAdapter.notifyDataSetChanged();
+
+                    // Inicia o cronômetro para o slider começar a rodar
+                    sliderHandler.postDelayed(sliderRunnable, 3000);
                 } else {
-                    Toast.makeText(HomeActivity.this, "Erro na API. Verifique a chave.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomeActivity.this, "Erro na API", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<MovieResponse> call, Throwable t) {
-                // Se não tiver internet ou der erro, mostra essa mensagem
-                Toast.makeText(HomeActivity.this, "Sem conexão com a internet" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(HomeActivity.this, "Erro: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sliderHandler.removeCallbacks(sliderRunnable);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!movieList.isEmpty()) {
+            sliderHandler.postDelayed(sliderRunnable, 3000);
+        }
     }
 }
