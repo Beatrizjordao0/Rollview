@@ -41,7 +41,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
                 .load(movie.getPosterUrl())
                 .into(holder.imgPoster);
     }
-    // A chave "}" extra que estava aqui foi removida!
 
     // Diz quantos itens existem na lista
     @Override
