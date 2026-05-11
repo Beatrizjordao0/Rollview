@@ -8,7 +8,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-// Importação da biblioteca Glide
 import com.bumptech.glide.Glide;
 
 import java.util.List;
@@ -17,12 +16,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     private List<Movie> movies;
 
-    // Construtor que recebe a lista
     public MovieAdapter(List<Movie> movies) {
         this.movies = movies;
     }
 
-    // Cria a visualização puxando o XML
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -30,33 +27,38 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         return new MovieViewHolder(view);
     }
 
-    // Preenche os dados do objeto na tela
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
         Movie movie = movies.get(position);
-        holder.tvTitle.setText(movie.getTitle());
 
-        // Usando o Glide para baixar a imagem da URL e colocar no ImageView
+        // Titulo holder.tvTitle.setText(movie.getTitle());
+        holder.tvYear.setText(movie.getYear());
+        holder.tvRating.setText(movie.getFormattedRating());
+
         Glide.with(holder.itemView.getContext())
                 .load(movie.getPosterUrl())
                 .into(holder.imgPoster);
     }
 
-    // Diz quantos itens existem na lista
     @Override
     public int getItemCount() {
         return movies.size();
     }
 
-    // Classe interna que mapeia os componentes do XML
     public static class MovieViewHolder extends RecyclerView.ViewHolder {
         ImageView imgPoster;
-        TextView tvTitle;
+        TextView tvYear;
+        TextView tvRating;
+        // Titulo TextView tvTitle;
 
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
             imgPoster = itemView.findViewById(R.id.imgMoviePoster);
-            tvTitle = itemView.findViewById(R.id.tvMovieTitle);
+
+            // Linkando os IDs do XML
+            tvYear = itemView.findViewById(R.id.tvMovieYear);
+            //  caso queira colocar o titulo tvTitle = itemView.findViewById(R.id.tvMovieTitle);
+            tvRating = itemView.findViewById(R.id.tvMovieRating);
         }
     }
 }

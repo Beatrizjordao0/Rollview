@@ -38,7 +38,7 @@ public class ShowcaseAdapter extends RecyclerView.Adapter<ShowcaseAdapter.Showca
 
     @Override
     public int getItemCount() {
-        // Pega apenas os 5 primeiros filmes para o carrossel, para não ficar gigante
+        //  5 primeiros filmes para o carrossel
         return Math.min(movies.size(), 5);
     }
 

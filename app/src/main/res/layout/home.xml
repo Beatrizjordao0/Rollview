@@ -7,6 +7,25 @@
     android:background="#121826">
 
     <!-- TOPO -->
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="13dp"
+        android:background="@drawable/navbar_rounded"
+        app:itemActiveIndicatorStyle="@null"
+        app:itemIconSize="24dp"
+        app:itemIconTint="@android:color/black"
+        app:itemTextColor="@android:color/black"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_menu" />
+
     <LinearLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
@@ -27,22 +46,6 @@
 
     <!-- BOTTOM NAVIGATION -->
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNav"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/navbar_rounded"
-        app:menu="@menu/bottom_menu"
-        app:labelVisibilityMode="labeled"
-        app:itemIconSize="24dp"
-        app:itemTextColor="@android:color/black"
-        app:itemIconTint="@android:color/black"
-        app:itemActiveIndicatorStyle="@null"/>
-
     <!-- Scroll Vertical -->
     <ScrollView
         android:layout_width="match_parent"
@@ -58,14 +61,12 @@
             android:orientation="vertical">
 
             <!-- SHOWCASE PRINCIPAL -->
-
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPagerShowcase"
                 android:layout_width="match_parent"
-                android:layout_height="280dp"
-                android:layout_marginBottom="20dp"/>
+                android:layout_height="216dp"
+                android:layout_marginBottom="20dp" />
 
-            <!-- TÍTULO -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -81,8 +82,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                android:scrollbars="none"
                 android:orientation="horizontal"
+                android:scrollbars="none"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
             </androidx.recyclerview.widget.RecyclerView>
