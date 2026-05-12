@@ -1,6 +1,6 @@
 package com.example.rollview;
 
-public class Movie {
+public class    Movie {
     private int id;
     private String title;
     private String poster_path;

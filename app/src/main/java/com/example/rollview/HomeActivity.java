@@ -72,7 +72,7 @@ public class HomeActivity extends AppCompatActivity {
                 .build();
 
         TmdbApi api = retrofit.create(TmdbApi.class);
-        String apiKey = "a83c1caa03c2bc3241bc62845df9e242";
+        String apiKey = "290f87fc1ed22d42148dd9fef3dc8e7b";
 
         Call<MovieResponse> call = api.getPopularMovies(apiKey, "pt-BR");
 
