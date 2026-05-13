@@ -1,13 +1,18 @@
 package com.example.rollview;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler; // Importação para o cronômetro
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2; // Importação do ViewPager
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeActivity extends AppCompatActivity {
 
+
     private RecyclerView recyclerView;
     private ViewPager2 viewPagerShowcase;
 
@@ -27,6 +33,8 @@ public class HomeActivity extends AppCompatActivity {
     private ShowcaseAdapter showcaseAdapter;
 
     private List<Movie> movieList = new ArrayList<>();
+
+
 
     //  Carrossel
     private Handler sliderHandler = new Handler();
@@ -60,9 +68,29 @@ public class HomeActivity extends AppCompatActivity {
         viewPagerShowcase = findViewById(R.id.viewPagerShowcase);
         showcaseAdapter = new ShowcaseAdapter(movieList);
         viewPagerShowcase.setAdapter(showcaseAdapter);
+        BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
 
         // Chama a API
         fetchMoviesFromApi();
+
+
+
+        // Lógica dos Botões do NavBar
+
+        bottomNav.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
+
+            if(id == R.id.nav_home) {
+                return true;
+            } else if(id == R.id.nav_profile){
+                Intent intent = new Intent(HomeActivity.this, PerfilActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+            }
+            return true;
+        });
+
     }
 
     private void fetchMoviesFromApi() {

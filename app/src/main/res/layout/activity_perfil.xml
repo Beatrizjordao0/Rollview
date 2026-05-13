@@ -38,7 +38,7 @@
                 android:layout_marginTop="22dp"
                 android:layout_marginEnd="22dp"
                 android:src="@android:drawable/ic_menu_preferences"
-                android:tint="#944264" />
+                app:tint="#944264" />
 
             <ImageView
                 android:id="@+id/imgPerfil"
@@ -90,16 +90,17 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
-        android:layout_width="340dp"
-        android:layout_height="70dp"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
         android:layout_marginBottom="13dp"
         android:background="@drawable/navbar_rounded"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
         app:itemActiveIndicatorStyle="@null"
-        app:itemIconSize="20dp"
+        app:itemIconSize="24dp"
         app:itemIconTint="@android:color/black"
         app:itemTextColor="@android:color/black"
         app:labelVisibilityMode="labeled"

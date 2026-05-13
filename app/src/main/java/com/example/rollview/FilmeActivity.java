@@ -11,9 +11,13 @@ import android.widget.Toast;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import retrofit2.Call;
@@ -36,6 +40,11 @@ public class FilmeActivity extends AppCompatActivity {
     RatingBar ratingBar;
 
     String posterUrl = "";
+
+    // Variáveis adicionadas para o Elenco
+    private RecyclerView recyclerCast;
+    private CastAdapter castAdapter;
+    private List<Actor> listActor = new ArrayList<>();
 
     public void abrirTelaAvaliacao(View view) {
         Intent intent = new Intent(FilmeActivity.this, AvaliacaoFilmeActivity.class);
@@ -63,6 +72,12 @@ public class FilmeActivity extends AppCompatActivity {
         txtNota = findViewById(R.id.txtNota);
         txtSinopse = findViewById(R.id.txtSinopse);
         ratingBar = findViewById(R.id.ratingBar);
+
+        // Inicializando o RecyclerView e o Adapter do elenco
+        recyclerCast = findViewById(R.id.recyclerCast); // Certifique-se de que o ID no XML é recyclerElenco
+        recyclerCast.setLayoutManager(new LinearLayoutManager(this));
+        castAdapter = new CastAdapter(listActor);
+        recyclerCast.setAdapter(castAdapter);
 
         btnBack.setOnClickListener(v -> finish());
 
@@ -94,7 +109,10 @@ public class FilmeActivity extends AppCompatActivity {
         });
 
         int movieId = getIntent().getIntExtra("movie_id", 269149);
+
+        // Chamadas para carregar os dados
         carregarFilme(movieId);
+        carregarElenco(movieId); // Chamada nova para preencher a lista
     }
 
     private void carregarFilme(int movieId) {
@@ -118,6 +136,47 @@ public class FilmeActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<TMDBMovieResponse> call, Throwable t) {
                 Toast.makeText(FilmeActivity.this, "Erro de conexão", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    // Método novo para carregar os atores da API
+    private void carregarElenco(int movieId) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        TmdbApi api = retrofit.create(TmdbApi.class);
+
+        api.getMovieCredits(movieId, API_KEY, "pt-BR").enqueue(new Callback<TMDBCreditsResponse>() {
+            @Override
+            public void onResponse(Call<TMDBCreditsResponse> call, Response<TMDBCreditsResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<TMDBCast> castList = response.body().getCast();
+                    listActor.clear(); // Limpa a lista antes de adicionar
+
+                    // Pega até 10 atores para não deixar a lista gigantesca
+                    int limite = Math.min(castList.size(), 10);
+
+                    for (int i = 0; i < limite; i++) {
+                        TMDBCast tmdbCast = castList.get(i);
+
+                        String imageUrl = tmdbCast.getProfilePath() != null
+                                ? IMAGE_BASE_URL + tmdbCast.getProfilePath()
+                                : null;
+
+                        listActor.add(new Actor(tmdbCast.getName(), tmdbCast.getCharacter(), imageUrl));
+                    }
+
+                    // Avisa o adapter que os dados chegaram para ele desenhar a tela
+                    castAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TMDBCreditsResponse> call, Throwable t) {
+                Toast.makeText(FilmeActivity.this, "Erro ao carregar elenco", Toast.LENGTH_SHORT).show();
             }
         });
     }

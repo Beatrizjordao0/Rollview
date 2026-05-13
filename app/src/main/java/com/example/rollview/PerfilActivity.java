@@ -1,5 +1,6 @@
 package com.example.rollview;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -8,6 +9,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +37,23 @@ public class PerfilActivity extends AppCompatActivity {
         txtUsername = findViewById(R.id.txtUsername);
 
         recyclerAvaliacoes = findViewById(R.id.recyclerAvaliacoes);
+        BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
+
+        // Lógica dos Botões da NAVBAR
+
+        bottomNav.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
+
+            if (id == R.id.nav_profile){
+                return true;
+            } else if (id == R.id.nav_home){
+                Intent intent = new Intent(PerfilActivity.this, HomeActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+            }
+            return false;
+        });
 
         Uri fotoPerfil = null;
 
@@ -71,6 +91,8 @@ public class PerfilActivity extends AppCompatActivity {
 
         recyclerAvaliacoes.setAdapter(adapter);
     }
+
+
 
     private void preencherPerfil(Usuario usuario){
 

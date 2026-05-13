@@ -16,7 +16,6 @@
         <activity
             android:name=".PerfilActivity"
             android:exported="false" />
-
         <activity android:name=".FilmeActivity" />
         <activity android:name=".AvaliacaoFilmeActivity" />
         <activity android:name=".LoginActivity" />
@@ -35,7 +34,6 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
     </application>
 
 </manifest>

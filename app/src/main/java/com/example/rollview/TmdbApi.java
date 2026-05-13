@@ -19,4 +19,11 @@ public interface TmdbApi {
             @Query("api_key") String apiKey,
             @Query("language") String language
     );
+
+    @GET("movie/{movie_id}/credits")
+    Call<TMDBCreditsResponse> getMovieCredits(
+            @Path("movie_id") int movieId,
+            @Query("api_key") String apiKey,
+            @Query("language") String language
+    );
 }
