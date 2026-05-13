@@ -1,6 +1,7 @@
 package com.example.rollview;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -41,6 +42,9 @@ public class FilmeActivity extends AppCompatActivity {
 
     String posterUrl = "";
 
+    String youtubeKey = "";
+    LinearLayout btnTrailer;
+
     // Variáveis adicionadas para o Elenco
     private RecyclerView recyclerCast;
     private CastAdapter castAdapter;
@@ -60,6 +64,16 @@ public class FilmeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filme);
+
+        btnTrailer = findViewById(R.id.Trailer);
+        btnTrailer.setOnClickListener(v -> {
+            if (!youtubeKey.isEmpty()) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=" + youtubeKey));
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Trailer não disponível", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         imgPoster = findViewById(R.id.imgPoster);
         imgBackground = findViewById(R.id.imgBackground);
@@ -113,6 +127,7 @@ public class FilmeActivity extends AppCompatActivity {
         // Chamadas para carregar os dados
         carregarFilme(movieId);
         carregarElenco(movieId); // Chamada nova para preencher a lista
+        carregarTrailer(movieId);
     }
 
     private void carregarFilme(int movieId) {
@@ -209,5 +224,36 @@ public class FilmeActivity extends AppCompatActivity {
                     .load(IMAGE_BASE_URL + filme.getBackdropPath())
                     .into(imgBackground);
         }
+    }
+
+    private void carregarTrailer(int movieId) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        TmdbApi api = retrofit.create(TmdbApi.class);
+
+        api.getMovieVideos(movieId, API_KEY, "pt-BR").enqueue(new Callback<TMDBVideoResponse>() {
+            @Override
+            public void onResponse(Call<TMDBVideoResponse> call, Response<TMDBVideoResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<TMDBVideoResponse.TMDBVideo> videos = response.body().getResults();
+                    for (TMDBVideoResponse.TMDBVideo video : videos) {
+                        // Verificamos se o vídeo é do YouTube e se é um Trailer ou Teaser
+                        if (video.getSite().equalsIgnoreCase("YouTube") &&
+                                (video.getType().equalsIgnoreCase("Trailer") || video.getType().equalsIgnoreCase("Teaser"))) {
+                            youtubeKey = video.getKey(); // Salva a chave para o botão usar
+                            break;
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TMDBVideoResponse> call, Throwable t) {
+                // Se falhar, a youtubeKey continuará vazia e o Toast avisará o usuário
+            }
+        });
     }
 }
