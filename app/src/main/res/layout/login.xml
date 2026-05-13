@@ -5,133 +5,142 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2b2a2a">
+    android:background="@color/azul_acinzentado">
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="410dp"
-        android:layout_height="450dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:transitionName="transicao_card"
+
 
         android:background="@drawable/bg_card2"
         android:orientation="vertical"
         android:padding="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.655" >
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.8">
 
         <TextView
-            android:id="@+id/login"
+            android:id="@+id/facalogin"
             android:layout_width="wrap_content"
-            android:layout_height="31dp"
-            android:layout_marginStart="120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:fontFamily="@font/poppins_light"
             android:text="Faça seu login"
             android:textColor="#944264"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/email"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:fontFamily="@font/poppins_light"
+            android:textSize="16sp"
             android:layout_marginTop="20dp"
-            android:text="Email"
-            android:textColor="#944264"
-            android:textSize="16sp" />
+            android:layout_marginBottom="20dp"/>
 
-        <EditText
-            android:id="@+id/inputEmail"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#000000"
-            android:hint="Digite seu email"
-            android:textColor="#000000"
-            android:textColorHint="#96846a"
-            android:inputType="textEmailAddress" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/senha"
-            android:layout_width="wrap_content"
-            android:layout_height="31dp"
-            android:fontFamily="@font/poppins_light"
-            android:text="Senha"
-            android:layout_marginTop="50dp"
-            android:textColor="#944264"
-            android:textSize="16sp" />
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_light"
+                android:text="Email"
+                android:textColor="#944264"
+                android:textSize="16sp" />
 
-        <EditText
-            android:id="@+id/inputsenha"
+            <EditText
+                android:id="@+id/inputEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#000000"
+                android:hint="Digite seu email"
+                android:textColor="#000000"
+                android:textColorHint="#96846a"
+                android:inputType="textEmailAddress" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#000000"
-            android:hint="Digite sua senha"
-            android:textColor="#000000"
-            android:textColorHint="#96846a"
-            android:layout_marginTop="-20dp"
-            android:inputType="textPassword"
-            android:singleLine="true"
-            android:minHeight="48dp"
-            android:paddingBottom="2dp"
-            />
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/senha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_light"
+                android:text="Senha"
+                android:textColor="#944264"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/inputsenha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#000000"
+                android:hint="Digite sua senha"
+                android:textColor="#000000"
+                android:textColorHint="#96846a"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                />
+        </LinearLayout>
 
         <Button
             android:id="@+id/bottonlogin"
             android:layout_width="190dp"
-            android:layout_height="42dp"
-            android:layout_marginBottom="150dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             android:background="@drawable/login_button"
-            android:backgroundTint="@null"
+            app:backgroundTint="@null"
             android:fontFamily="@font/poppins_light"
             android:text="@string/login"
-            app:backgroundTint="@null"
-            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-            app:layout_constraintEnd_toEndOf="@+id/linearLayout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/linearLayout"
-            android:layout_marginStart="85dp"
-            android:layout_marginTop="40dp"/>
+            android:textColor="@color/white"
+            android:layout_gravity="center"/>
 
         <TextView
             android:id="@+id/login"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_marginStart="140dp"
-            android:layout_marginTop="-130dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:fontFamily="@font/poppins_light"
             android:text="Ou entre com"
             android:textColor="#000000"
-            android:textSize="12sp" />
+            android:textSize="15sp" />
 
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="20dp"
-            android:src="@drawable/google"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="145dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="40dp">
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="40dp"
-            android:src="@drawable/facebook"
-            android:layout_marginTop="-36dp"
-            android:layout_marginStart="190dp"/>
 
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="30dp"
+                android:src="@drawable/google"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginEnd="10dp"
+                />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/facebook"
+                android:layout_gravity="center_horizontal"
+                />
+
+        </LinearLayout>
     </LinearLayout>
 
     <ImageView
         android:id="@+id/imagemLogo"
-        android:layout_width="380dp"
-        android:layout_height="370dp"
-        android:layout_marginTop="-80dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:contentDescription="@string/logo"
         android:src="@drawable/logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

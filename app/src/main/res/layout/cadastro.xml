@@ -5,12 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2b2a2a">
+    android:background="@color/azul_acinzentado">
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="410dp"
-        android:layout_height="530dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:transitionName="transicao_card"
 
         android:background="@drawable/bg_card2"
         android:orientation="vertical"
@@ -20,13 +21,13 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.655" >
+        app:layout_constraintVertical_bias="0.655"
+        android:gravity="center">
 
         <TextView
-            android:id="@+id/login"
+            android:id="@+id/titulocadastro"
             android:layout_width="wrap_content"
-            android:layout_height="31dp"
-            android:layout_marginStart="110dp"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_light"
             android:text="Junte-se à nós"
             android:textColor="#944264"
@@ -36,103 +37,119 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
-
-        <TextView
-            android:id="@+id/usuario"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:fontFamily="@font/poppins_light"
-            android:layout_marginTop="20dp"
-            android:text="Usuário"
-            android:textColor="#944264"
-            android:textSize="14sp" />
-
-        <EditText
-            android:id="@+id/inputusuario"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#000000"
-            android:hint="Digite seu nome de usuário"
-            android:textColor="#000000"
-            android:textColorHint="#96846a"
-            android:inputType="textEmailAddress"
-            android:textSize="14sp"/>
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/usuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_light"
+                android:layout_marginTop="20dp"
+                android:text="Usuário"
+                android:textColor="#944264"
+                android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/email"
-            android:layout_width="wrap_content"
-            android:layout_height="31dp"
-            android:fontFamily="@font/poppins_light"
-            android:text="Email"
-            android:layout_marginTop="15dp"
-            android:textColor="#944264"
-            android:textSize="14sp" />
+            <EditText
+                android:id="@+id/inputusuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#000000"
+                android:hint="Digite seu nome de usuário"
+                android:textColor="#000000"
+                android:textColorHint="#96846a"
+                android:inputType="textEmailAddress"
+                android:textSize="14sp"/>
 
-        <EditText
-            android:id="@+id/inputemail"
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#000000"
-            android:hint="Digite seu email"
-            android:textColor="#000000"
-            android:textColorHint="#96846a"
-            android:layout_marginTop="-20dp"
-            android:inputType="textPassword"
-            android:singleLine="true"
-            android:minHeight="48dp"
-            android:paddingBottom="2dp"
-            android:textSize="14sp"
-            />
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="31dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="Email"
+                android:layout_marginTop="15dp"
+                android:textColor="#944264"
+                android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/senha"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:fontFamily="@font/poppins_light"
-            android:layout_marginTop="20dp"
-            android:text="Senha"
-            android:textColor="#944264"
-            android:textSize="14sp" />
-
-        <EditText
-            android:id="@+id/inputsenha"
+            <EditText
+                android:id="@+id/inputemail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#000000"
+                android:hint="Digite seu email"
+                android:textColor="#000000"
+                android:textColorHint="#96846a"
+                android:layout_marginTop="-20dp"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:minHeight="48dp"
+                android:paddingBottom="2dp"
+                android:textSize="14sp"
+                />
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#000000"
-            android:hint="Digite sua senha"
-            android:textColor="#000000"
-            android:textColorHint="#96846a"
-            android:inputType="textEmailAddress"
-            android:textSize="14sp"/>
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/senha"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:fontFamily="@font/poppins_light"
+                android:layout_marginTop="20dp"
+                android:text="Senha"
+                android:textColor="#944264"
+                android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/csenha"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:fontFamily="@font/poppins_light"
-            android:layout_marginTop="20dp"
-            android:text="Confirme sua senha"
-            android:textColor="#944264"
-            android:textSize="14sp" />
-
-        <EditText
-            android:id="@+id/confsenha"
+            <EditText
+                android:id="@+id/inputsenha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#000000"
+                android:hint="Digite sua senha"
+                android:textColor="#000000"
+                android:textColorHint="#96846a"
+                android:inputType="textEmailAddress"
+                android:textSize="14sp"/>
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#000000"
-            android:hint="Digite sua senha novamente"
-            android:textColor="#000000"
-            android:textColorHint="#96846a"
-            android:inputType="textEmailAddress"
-            android:textSize="14sp"/>
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/csenha"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:fontFamily="@font/poppins_light"
+                android:layout_marginTop="20dp"
+                android:text="Confirme sua senha"
+                android:textColor="#944264"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/confsenha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#000000"
+                android:hint="Digite sua senha novamente"
+                android:textColor="#000000"
+                android:textColorHint="#96846a"
+                android:inputType="textEmailAddress"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
 
         <Button
             android:id="@+id/bottoncadastro"
             android:layout_width="190dp"
             android:layout_height="48dp"
-            android:layout_marginStart="85dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="150dp"
+            android:layout_margin="20dp"
             android:background="@drawable/login_button"
             android:backgroundTint="@null"
             android:fontFamily="@font/poppins_light"
@@ -147,45 +164,45 @@
             android:id="@+id/cadastro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="115dp"
-            android:layout_marginTop="-140dp"
             android:fontFamily="@font/poppins_light"
             android:text="Ou cadrastre-se com"
             android:textColor="#000000"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            android:textSize="15sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_margin="20dp">
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="30dp"
+                android:src="@drawable/google"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="5dp"/>
 
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="20dp"
-            android:src="@drawable/google"
-            android:layout_marginTop="1dp"
-            android:layout_marginStart="145dp"/>
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="40dp"
-            android:src="@drawable/facebook"
-            android:layout_marginTop="-36dp"
-            android:layout_marginStart="190dp"/>
-
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/facebook"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="5dp"
+                />
+        </LinearLayout>
 
     </LinearLayout>
 
     <ImageView
         android:id="@+id/imagemLogo"
-        android:layout_width="380dp"
-        android:layout_height="370dp"
-        android:layout_marginTop="-120dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:contentDescription="@string/logo"
         android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

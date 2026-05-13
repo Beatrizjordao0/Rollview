@@ -10,9 +10,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.core.app.ActivityOptionsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
+    // variáveis
     Button buttonLogin;
     Button buttonSignup;
     TextView skipButton;
@@ -22,13 +24,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
 
-        // tela inicial
+        // Adiciona o activity_main.xml como tela inicial
         setContentView(R.layout.activity_main);
 
+        // Puxa os Ids das views do xml e guarda em variáveis
         skipButton = findViewById(R.id.skip);
         buttonLogin = findViewById(R.id.login);
         buttonSignup = findViewById(R.id.signup);
 
+        // Função
         skipButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, HomeActivity.class);
             startActivity(intent);
@@ -36,12 +40,20 @@ public class MainActivity extends AppCompatActivity {
 
         buttonLogin.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    MainActivity.this,
+                    findViewById(R.id.linearLayout),
+                    "transicao_card");
+            startActivity(intent, options.toBundle());
         });
 
         buttonSignup.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SignupActivity.class);
-            startActivity(intent);
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    MainActivity.this,
+                    findViewById(R.id.linearLayout),
+                    "transicao_card");
+            startActivity(intent, options.toBundle());
         });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
