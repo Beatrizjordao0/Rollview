@@ -47,7 +47,6 @@ public class FilmeActivity extends AppCompatActivity {
     String youtubeKey = "";
     LinearLayout btnTrailer;
 
-    // Variáveis adicionadas para o Elenco
     private RecyclerView recyclerCast;
     private CastAdapter castAdapter;
     private List<TMDBCast> listaAtoresGlobais = new ArrayList<>();
@@ -102,24 +101,20 @@ public class FilmeActivity extends AppCompatActivity {
 
         // CLIQUE NO ELENCO
         tvCast.setOnClickListener(v -> {
-            // Manda a lista de atores para o adapter
             if (castAdapter != null) {
                 castAdapter.atualizarLista(listaAtoresGlobais);
             }
 
-            // Pinta o Elenco e apaga a Direção
             tvCast.setTextColor(Color.parseColor("#944264")); // Cor ativa
             tvDirection.setTextColor(Color.WHITE); // Cor inativa
         });
 
         // CLIQUE NA DIREÇÃO
         tvDirection.setOnClickListener(v -> {
-            // Manda a lista de diretores para o adapter
             if (castAdapter != null) {
                 castAdapter.atualizarLista(listaDiretoresGlobais);
             }
 
-            // Pinta a Direção e apaga o Elenco
             tvDirection.setTextColor(Color.parseColor("#944264")); // Cor ativa
             tvCast.setTextColor(Color.WHITE); // Cor inativa
         });
@@ -174,9 +169,8 @@ public class FilmeActivity extends AppCompatActivity {
 
         int movieId = getIntent().getIntExtra("movie_id", 269149);
 
-        // Chamadas para carregar os dados
         carregarFilme(movieId);
-        carregarElenco(movieId); // Chamada nova para preencher a lista
+        carregarElenco(movieId);
         carregarTrailer(movieId);
     }
 
@@ -230,7 +224,6 @@ public class FilmeActivity extends AppCompatActivity {
                         listaAtoresGlobais.add(castList.get(i));
                     }
 
-                    // 2. Pega os Diretores (Sem o ponto e vírgula acidental no if!)
                     if (response.body().getCrew() != null) {
                         for (TMDBCast pessoa : response.body().getCrew()) {
                             if (pessoa.getJob() != null && (pessoa.getJob().equals("Director") || pessoa.getJob().equals("Diretor"))) {
@@ -239,7 +232,6 @@ public class FilmeActivity extends AppCompatActivity {
                         }
                     }
 
-                    // 3. Configura o Adapter inicial com o Elenco
                     castAdapter = new CastAdapter(listaAtoresGlobais);
                     recyclerCast.setAdapter(castAdapter);
                 }
