@@ -1,6 +1,7 @@
 package com.example.rollview;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageButton;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +50,8 @@ public class FilmeActivity extends AppCompatActivity {
     // Variáveis adicionadas para o Elenco
     private RecyclerView recyclerCast;
     private CastAdapter castAdapter;
-    private List<Actor> listActor = new ArrayList<>();
+    private List<TMDBCast> listaAtoresGlobais = new ArrayList<>();
+    private List<TMDBCast> listaDiretoresGlobais = new ArrayList<>();
 
     public void abrirTelaAvaliacao(View view) {
         Intent intent = new Intent(FilmeActivity.this, AvaliacaoFilmeActivity.class);
@@ -90,8 +93,55 @@ public class FilmeActivity extends AppCompatActivity {
         // Inicializando o RecyclerView e o Adapter do elenco
         recyclerCast = findViewById(R.id.recyclerCast); // Certifique-se de que o ID no XML é recyclerElenco
         recyclerCast.setLayoutManager(new LinearLayoutManager(this));
-        castAdapter = new CastAdapter(listActor);
+        castAdapter = new CastAdapter(listaAtoresGlobais);
         recyclerCast.setAdapter(castAdapter);
+        BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
+
+        TextView tvCast = findViewById(R.id.tabCast);
+        TextView tvDirection = findViewById(R.id.tabDirection);
+
+        // CLIQUE NO ELENCO
+        tvCast.setOnClickListener(v -> {
+            // Manda a lista de atores para o adapter
+            if (castAdapter != null) {
+                castAdapter.atualizarLista(listaAtoresGlobais);
+            }
+
+            // Pinta o Elenco e apaga a Direção
+            tvCast.setTextColor(Color.parseColor("#944264")); // Cor ativa
+            tvDirection.setTextColor(Color.WHITE); // Cor inativa
+        });
+
+        // CLIQUE NA DIREÇÃO
+        tvDirection.setOnClickListener(v -> {
+            // Manda a lista de diretores para o adapter
+            if (castAdapter != null) {
+                castAdapter.atualizarLista(listaDiretoresGlobais);
+            }
+
+            // Pinta a Direção e apaga o Elenco
+            tvDirection.setTextColor(Color.parseColor("#944264")); // Cor ativa
+            tvCast.setTextColor(Color.WHITE); // Cor inativa
+        });
+
+        // Logíca dos botões NAVBAR
+        bottomNav.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
+
+            if(id == R.id.nav_home){
+                Intent intent = new Intent(FilmeActivity.this, HomeActivity.class);
+                startActivity(intent);
+                return true;
+            } else if(id == R.id.nav_profile){
+                Intent intent = new Intent(FilmeActivity.this, PerfilActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+            }
+            return false;
+        });
+
+
 
         btnBack.setOnClickListener(v -> finish());
 
@@ -168,24 +218,30 @@ public class FilmeActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<TMDBCreditsResponse> call, Response<TMDBCreditsResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    List<TMDBCast> castList = response.body().getCast();
-                    listActor.clear(); // Limpa a lista antes de adicionar
 
-                    // Pega até 10 atores para não deixar a lista gigantesca
+                    listaAtoresGlobais.clear();
+                    listaDiretoresGlobais.clear();
+
+                    // 1. Pega os Atores (limite de 10)
+                    List<TMDBCast> castList = response.body().getCast();
                     int limite = Math.min(castList.size(), 10);
 
                     for (int i = 0; i < limite; i++) {
-                        TMDBCast tmdbCast = castList.get(i);
-
-                        String imageUrl = tmdbCast.getProfilePath() != null
-                                ? IMAGE_BASE_URL + tmdbCast.getProfilePath()
-                                : null;
-
-                        listActor.add(new Actor(tmdbCast.getName(), tmdbCast.getCharacter(), imageUrl));
+                        listaAtoresGlobais.add(castList.get(i));
                     }
 
-                    // Avisa o adapter que os dados chegaram para ele desenhar a tela
-                    castAdapter.notifyDataSetChanged();
+                    // 2. Pega os Diretores (Sem o ponto e vírgula acidental no if!)
+                    if (response.body().getCrew() != null) {
+                        for (TMDBCast pessoa : response.body().getCrew()) {
+                            if (pessoa.getJob() != null && (pessoa.getJob().equals("Director") || pessoa.getJob().equals("Diretor"))) {
+                                listaDiretoresGlobais.add(pessoa);
+                            }
+                        }
+                    }
+
+                    // 3. Configura o Adapter inicial com o Elenco
+                    castAdapter = new CastAdapter(listaAtoresGlobais);
+                    recyclerCast.setAdapter(castAdapter);
                 }
             }
 

@@ -1,9 +1,16 @@
 package com.example.rollview;
 
+import com.google.gson.annotations.SerializedName;
+
 public class TMDBCast {
+    @SerializedName("name")
     private String name;
+    @SerializedName("character")
     private String character;
-    private String profile_path;
+    @SerializedName("profile_path")
+    private String profilePath;
+    @SerializedName("job")
+    private String job;
 
     public String getName() {
         return name;
@@ -14,6 +21,15 @@ public class TMDBCast {
     }
 
     public String getProfilePath() {
-        return profile_path;
+        return profilePath;
     }
+    public String getJob() {
+        if(job != null && !job.isEmpty()){
+         if(job.equals("Director") || job.equals("Diretor")){
+             return "Diretor";
+            }
+            return job;
+        }
+        return character;
+    };
 }
