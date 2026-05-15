@@ -51,6 +51,8 @@ public class FilmeActivity extends AppCompatActivity {
     private CastAdapter castAdapter;
     private List<TMDBCast> listaAtoresGlobais = new ArrayList<>();
     private List<TMDBCast> listaDiretoresGlobais = new ArrayList<>();
+    private List<TMDBGender> listaGeneroGlobais = new ArrayList<>();
+    private GenderAdapter genderAdapter;
 
     public void abrirTelaAvaliacao(View view) {
         Intent intent = new Intent(FilmeActivity.this, AvaliacaoFilmeActivity.class);
@@ -98,26 +100,41 @@ public class FilmeActivity extends AppCompatActivity {
 
         TextView tvCast = findViewById(R.id.tabCast);
         TextView tvDirection = findViewById(R.id.tabDirection);
+        TextView tvGender = findViewById(R.id.tabGender);
 
         // CLIQUE NO ELENCO
         tvCast.setOnClickListener(v -> {
+            recyclerCast.setAdapter(castAdapter);
             if (castAdapter != null) {
                 castAdapter.atualizarLista(listaAtoresGlobais);
             }
 
             tvCast.setTextColor(Color.parseColor("#944264")); // Cor ativa
             tvDirection.setTextColor(Color.WHITE); // Cor inativa
+            tvGender.setTextColor(Color.WHITE); // Cor inativa
         });
 
         // CLIQUE NA DIREÇÃO
         tvDirection.setOnClickListener(v -> {
             if (castAdapter != null) {
+                recyclerCast.setAdapter(castAdapter);
                 castAdapter.atualizarLista(listaDiretoresGlobais);
             }
 
             tvDirection.setTextColor(Color.parseColor("#944264")); // Cor ativa
             tvCast.setTextColor(Color.WHITE); // Cor inativa
+            tvGender.setTextColor(Color.WHITE); // Cor inativa
         });
+
+        // CLIQUE NO GÊNERO
+        tvGender.setOnClickListener(v -> {
+            if(genderAdapter != null) recyclerCast.setAdapter(genderAdapter);
+
+            tvGender.setTextColor(Color.parseColor("#944264")); // Cor ativa
+            tvCast.setTextColor(Color.WHITE); // Cor inativa
+            tvDirection.setTextColor(Color.WHITE); // Cor inativa
+        });
+
 
         // Logíca dos botões NAVBAR
         bottomNav.setOnItemSelectedListener(item -> {
@@ -271,6 +288,11 @@ public class FilmeActivity extends AppCompatActivity {
             Glide.with(this)
                     .load(IMAGE_BASE_URL + filme.getBackdropPath())
                     .into(imgBackground);
+        }
+
+        if(filme.getGenres() != null){
+            listaGeneroGlobais = filme.getGenres();
+            genderAdapter = new GenderAdapter(listaGeneroGlobais);
         }
     }
 

@@ -2,6 +2,8 @@ package com.example.rollview;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class TMDBMovieResponse {
 
     @SerializedName("title")
@@ -24,6 +26,13 @@ public class TMDBMovieResponse {
 
     @SerializedName("backdrop_path")
     private String backdropPath;
+
+    @SerializedName("genres")
+    private List<TMDBGender> genres;
+
+    public List<TMDBGender> getGenres() {
+        return genres;
+    }
 
     public String getTitle() {
         return title;
