@@ -33,4 +33,11 @@ public interface TmdbApi {
             @Query("api_key") String apiKey,
             @Query("language") String language
     );
-}
+
+    @GET("search/movie")
+    Call<MovieSearchResponse> searchMovies(
+            @Query("api_key") String apiKey,
+            @Query("language") String language,
+            @Query("query") String query
+    );
+ }

@@ -22,6 +22,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         this.movies = movies;
     }
 
+    public void atualizarLista(List<Movie> novaLista){
+        this.movies = novaLista;
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

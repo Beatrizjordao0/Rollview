@@ -44,9 +44,6 @@
 
     </LinearLayout>
 
-    <!-- BOTTOM NAVIGATION -->
-
-    <!-- Scroll Vertical -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -60,7 +57,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- SHOWCASE PRINCIPAL -->
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPagerShowcase"
                 android:layout_width="match_parent"
