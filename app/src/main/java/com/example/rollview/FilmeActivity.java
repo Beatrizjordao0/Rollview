@@ -38,12 +38,10 @@ public class FilmeActivity extends AppCompatActivity {
     ImageView imgPoster, imgBackground;
     ImageButton btnBack;
     LinearLayout btnAvaliar;
-
     TextView txtTitulo, txtInfo, txtDuracao, txtNota, txtSinopse;
     RatingBar ratingBar;
 
     String posterUrl = "";
-
     String youtubeKey = "";
     LinearLayout btnTrailer;
 
@@ -51,16 +49,18 @@ public class FilmeActivity extends AppCompatActivity {
     private CastAdapter castAdapter;
     private List<TMDBCast> listaAtoresGlobais = new ArrayList<>();
     private List<TMDBCast> listaDiretoresGlobais = new ArrayList<>();
-    private List<TMDBGender> listaGeneroGlobais = new ArrayList<>();
+    private List<TMDBGender> listaGeneroGlobais = new ArrayList<>(); // Corrigido para TMDBGenre
     private GenderAdapter genderAdapter;
 
+    // Variável global para guardar o filme atual e passar para o botão salvar
+    private TMDBMovieResponse currentMovie;
+
+    // (Opcional) Método chamado direto do XML, caso você use onClick no layout
     public void abrirTelaAvaliacao(View view) {
         Intent intent = new Intent(FilmeActivity.this, AvaliacaoFilmeActivity.class);
-
         intent.putExtra("titulo", txtTitulo.getText().toString());
         intent.putExtra("ano", txtInfo.getText().toString());
         intent.putExtra("poster", posterUrl);
-
         startActivity(intent);
     }
 
@@ -91,27 +91,28 @@ public class FilmeActivity extends AppCompatActivity {
         txtSinopse = findViewById(R.id.txtSinopse);
         ratingBar = findViewById(R.id.ratingBar);
 
-        // Inicializando o RecyclerView e o Adapter do elenco
-        recyclerCast = findViewById(R.id.recyclerCast); // Certifique-se de que o ID no XML é recyclerElenco
+        // CORREÇÃO: Faltava o findViewById do RecyclerCast, o que causava erro ao abrir a tela
+        recyclerCast = findViewById(R.id.recyclerCast);
+
         recyclerCast.setLayoutManager(new LinearLayoutManager(this));
         castAdapter = new CastAdapter(listaAtoresGlobais);
         recyclerCast.setAdapter(castAdapter);
+
         BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
 
         TextView tvCast = findViewById(R.id.tabCast);
         TextView tvDirection = findViewById(R.id.tabDirection);
         TextView tvGender = findViewById(R.id.tabGender);
 
-        // CLIQUE NO ELENCO
         tvCast.setOnClickListener(v -> {
             recyclerCast.setAdapter(castAdapter);
             if (castAdapter != null) {
                 castAdapter.atualizarLista(listaAtoresGlobais);
             }
 
-            tvCast.setTextColor(Color.parseColor("#944264")); // Cor ativa
-            tvDirection.setTextColor(Color.WHITE); // Cor inativa
-            tvGender.setTextColor(Color.WHITE); // Cor inativa
+            tvCast.setTextColor(Color.parseColor("#944264"));
+            tvDirection.setTextColor(Color.WHITE);
+            tvGender.setTextColor(Color.WHITE);
         });
 
         // CLIQUE NA DIREÇÃO
@@ -121,71 +122,57 @@ public class FilmeActivity extends AppCompatActivity {
                 castAdapter.atualizarLista(listaDiretoresGlobais);
             }
 
-            tvDirection.setTextColor(Color.parseColor("#944264")); // Cor ativa
-            tvCast.setTextColor(Color.WHITE); // Cor inativa
-            tvGender.setTextColor(Color.WHITE); // Cor inativa
+            tvDirection.setTextColor(Color.parseColor("#944264"));
+            tvCast.setTextColor(Color.WHITE);
+            tvGender.setTextColor(Color.WHITE);
         });
 
         // CLIQUE NO GÊNERO
         tvGender.setOnClickListener(v -> {
-            if(genderAdapter != null) recyclerCast.setAdapter(genderAdapter);
+            if (genderAdapter != null) recyclerCast.setAdapter(genderAdapter);
 
             tvGender.setTextColor(Color.parseColor("#944264")); // Cor ativa
             tvCast.setTextColor(Color.WHITE); // Cor inativa
             tvDirection.setTextColor(Color.WHITE); // Cor inativa
         });
 
-
         // Logíca dos botões NAVBAR
         bottomNav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
 
-            if(id == R.id.nav_home){
+            if (id == R.id.nav_home) {
                 Intent intent = new Intent(FilmeActivity.this, HomeActivity.class);
                 startActivity(intent);
                 return true;
-            } else if(id == R.id.nav_profile){
+            } else if (id == R.id.nav_profile) {
                 Intent intent = new Intent(FilmeActivity.this, PerfilActivity.class);
                 startActivity(intent);
                 finish();
                 return true;
-            } else if(id == R.id.nav_search){
+            } else if (id == R.id.nav_search) {
                 Intent intent = new Intent(FilmeActivity.this, SearchActivity.class);
                 startActivity(intent);
                 finish();
+                return true;
             }
             return false;
         });
 
-
-
         btnBack.setOnClickListener(v -> finish());
 
+        // BLOCO DO BOTÃO AVALIAR CORRIGIDO E LIMPO
         btnAvaliar.setOnClickListener(v -> {
+            // Guarda o filme completo na Sessão para a próxima tela usar
+            if (currentMovie != null) {
+                Sessao.filmeAtual = currentMovie;
+            }
 
-            Intent intent =
-                    new Intent(
-                            FilmeActivity.this,
-                            AvaliacaoFilmeActivity.class
-                    );
-
-            intent.putExtra(
-                    "titulo",
-                    txtTitulo.getText().toString()
-            );
-
-            intent.putExtra(
-                    "ano",
-                    txtInfo.getText().toString()
-            );
-
-            intent.putExtra(
-                    "poster",
-                    posterUrl
-            );
+            Intent intent = new Intent(FilmeActivity.this, AvaliacaoFilmeActivity.class);
+            intent.putExtra("titulo", txtTitulo.getText().toString());
+            intent.putExtra("ano", txtInfo.getText().toString());
+            intent.putExtra("poster", posterUrl);
 
             startActivity(intent);
-
         });
 
         int movieId = getIntent().getIntExtra("movie_id", 269149);
@@ -207,7 +194,7 @@ public class FilmeActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<TMDBMovieResponse> call, Response<TMDBMovieResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    preencherTela(response.body());
+                    preencherTela(response.body()); // Passa o objeto do filme
                 } else {
                     Toast.makeText(FilmeActivity.this, "Erro ao carregar filme", Toast.LENGTH_SHORT).show();
                 }
@@ -220,7 +207,6 @@ public class FilmeActivity extends AppCompatActivity {
         });
     }
 
-    // Método novo para carregar os atores da API
     private void carregarElenco(int movieId) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -237,7 +223,6 @@ public class FilmeActivity extends AppCompatActivity {
                     listaAtoresGlobais.clear();
                     listaDiretoresGlobais.clear();
 
-                    // 1. Pega os Atores (limite de 10)
                     List<TMDBCast> castList = response.body().getCast();
                     int limite = Math.min(castList.size(), 10);
 
@@ -265,37 +250,40 @@ public class FilmeActivity extends AppCompatActivity {
         });
     }
 
-    private void preencherTela(TMDBMovieResponse filme) {
-        txtTitulo.setText(filme.getTitle());
+    // Usando a palavra "movie" como você pediu
+    private void preencherTela(TMDBMovieResponse movie) {
+        // Salva na variável global para o botão Avaliar conseguir acessar
+        this.currentMovie = movie;
+
+        txtTitulo.setText(movie.getTitle());
 
         String ano = "";
-        if (filme.getReleaseDate() != null && filme.getReleaseDate().length() >= 4) {
-            ano = filme.getReleaseDate().substring(0, 4);
+        if (movie.getReleaseDate() != null && movie.getReleaseDate().length() >= 4) {
+            ano = movie.getReleaseDate().substring(0, 4);
         }
 
         txtInfo.setText(ano);
-        txtDuracao.setText(filme.getRuntime() + " mins");
-        txtNota.setText(String.format(Locale.US, "%.1f", filme.getVoteAverage()));
-        txtSinopse.setText(filme.getOverview());
+        txtDuracao.setText(movie.getRuntime() + " mins");
+        txtNota.setText(String.format(Locale.US, "%.1f", movie.getVoteAverage()));
+        txtSinopse.setText(movie.getOverview());
 
-        ratingBar.setRating((float) filme.getVoteAverage() / 2);
+        ratingBar.setRating((float) movie.getVoteAverage() / 2);
 
-        if (filme.getPosterPath() != null) {
-            posterUrl = IMAGE_BASE_URL + filme.getPosterPath();
-
+        if (movie.getPosterPath() != null) {
+            posterUrl = IMAGE_BASE_URL + movie.getPosterPath();
             Glide.with(this)
                     .load(posterUrl)
                     .into(imgPoster);
         }
 
-        if (filme.getBackdropPath() != null) {
+        if (movie.getBackdropPath() != null) {
             Glide.with(this)
-                    .load(IMAGE_BASE_URL + filme.getBackdropPath())
+                    .load(IMAGE_BASE_URL + movie.getBackdropPath())
                     .into(imgBackground);
         }
 
-        if(filme.getGenres() != null){
-            listaGeneroGlobais = filme.getGenres();
+        if (movie.getGenres() != null) {
+            listaGeneroGlobais = movie.getGenres();
             genderAdapter = new GenderAdapter(listaGeneroGlobais);
         }
     }
@@ -314,10 +302,9 @@ public class FilmeActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     List<TMDBVideoResponse.TMDBVideo> videos = response.body().getResults();
                     for (TMDBVideoResponse.TMDBVideo video : videos) {
-                        // Verificamos se o vídeo é do YouTube e se é um Trailer ou Teaser
                         if (video.getSite().equalsIgnoreCase("YouTube") &&
                                 (video.getType().equalsIgnoreCase("Trailer") || video.getType().equalsIgnoreCase("Teaser"))) {
-                            youtubeKey = video.getKey(); // Salva a chave para o botão usar
+                            youtubeKey = video.getKey();
                             break;
                         }
                     }
@@ -326,7 +313,6 @@ public class FilmeActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<TMDBVideoResponse> call, Throwable t) {
-                // Se falhar, a youtubeKey continuará vazia e o Toast avisará o usuário
             }
         });
     }

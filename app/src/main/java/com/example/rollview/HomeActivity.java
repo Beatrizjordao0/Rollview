@@ -91,6 +91,10 @@ public class HomeActivity extends AppCompatActivity {
                 Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
                 startActivity(intent);
                 finish();
+            } else if(id == R.id.nav_list){
+                Intent intent = new Intent(HomeActivity.this, FavoriteActivity.class);
+                startActivity(intent);
+                finish();
             }
             return true;
         });

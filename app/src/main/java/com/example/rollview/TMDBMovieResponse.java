@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class TMDBMovieResponse {
+    @SerializedName("id")
+    private int id;
 
     @SerializedName("title")
     private String title;
@@ -32,6 +34,10 @@ public class TMDBMovieResponse {
 
     public List<TMDBGender> getGenres() {
         return genres;
+    }
+
+    public int getId(){
+        return id;
     }
 
     public String getTitle() {

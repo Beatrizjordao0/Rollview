@@ -80,12 +80,24 @@ public class AvaliacaoFilmeActivity extends AppCompatActivity {
 
             Sessao.avaliacoes.add(0, avaliacao);
 
-            Intent intent = new Intent(AvaliacaoFilmeActivity.this, PerfilActivity.class);
+            if (Sessao.filmeAtual != null) {
+                boolean jaSalvo = false;
+                for (TMDBMovieResponse f : Sessao.favorites) {
+                    if (f.getId() == Sessao.filmeAtual.getId()) {
+                        jaSalvo = true;
+                        break;
+                    }
+                }
+                if (!jaSalvo) {
+                    Sessao.favorites.add(Sessao.filmeAtual);
+                }
+            }
 
+            Intent intent = new Intent(AvaliacaoFilmeActivity.this, PerfilActivity.class);
             intent.putExtra("nome", Sessao.nomeUsuario);
             intent.putExtra("username", Sessao.username);
-
             startActivity(intent);
+
             finish();
         });
     }
