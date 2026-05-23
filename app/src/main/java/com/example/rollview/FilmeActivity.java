@@ -149,6 +149,10 @@ public class FilmeActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
                 return true;
+            } else if(id == R.id.nav_search){
+                Intent intent = new Intent(FilmeActivity.this, SearchActivity.class);
+                startActivity(intent);
+                finish();
             }
             return false;
         });

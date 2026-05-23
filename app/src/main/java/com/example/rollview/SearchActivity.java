@@ -1,5 +1,6 @@
 package com.example.rollview;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.net.Inet4Address;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,11 +47,26 @@ public class SearchActivity extends AppCompatActivity {
         recyclerSearch.setLayoutManager(new GridLayoutManager(this, 2));
         movieAdapter = new MovieAdapter(listMovies);
         recyclerSearch.setAdapter(movieAdapter);
-
         BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
 
-        bottomNav.setSelectedItemId(R.id.nav_search);
 
+        bottomNav.setSelectedItemId(R.id.nav_search);
+        bottomNav.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
+
+            if(id == R.id.nav_search){
+                return true;
+            } else if(id == R.id.nav_home) {
+                Intent intent = new Intent(SearchActivity.this, HomeActivity.class);
+                startActivity(intent);
+                finish();
+            } else if(id == R.id.nav_profile){
+                Intent intent = new Intent(SearchActivity.this, PerfilActivity.class);
+                startActivity(intent);
+                finish();
+            }
+            return true;
+        });
 
 
         btnBuscar.setOnClickListener(v -> {
