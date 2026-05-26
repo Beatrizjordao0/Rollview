@@ -64,6 +64,10 @@ public class SearchActivity extends AppCompatActivity {
                 Intent intent = new Intent(SearchActivity.this, PerfilActivity.class);
                 startActivity(intent);
                 finish();
+            } else if(id == R.id.nav_list){
+                Intent intent = new Intent(SearchActivity.this, FavoriteActivity.class);
+                startActivity(intent);
+                finish();
             }
             return true;
         });

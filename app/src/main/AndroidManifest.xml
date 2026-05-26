@@ -18,7 +18,7 @@
             android:exported="false" />
         <activity android:name=".FilmeActivity" />
         <activity android:name=".AvaliacaoFilmeActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".LoginActivity" android:exported="true"/>
         <activity android:name=".SignupActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".SearchActivity" />

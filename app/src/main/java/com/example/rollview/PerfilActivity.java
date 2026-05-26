@@ -55,7 +55,11 @@ public class PerfilActivity extends AppCompatActivity {
                 Intent intent = new Intent(PerfilActivity.this, SearchActivity.class);
                 startActivity(intent);
                 finish();
-            }
+            } else if(id == R.id.nav_list){
+            Intent intent = new Intent(PerfilActivity.this, FavoriteActivity.class);
+            startActivity(intent);
+            finish();
+        }
             return false;
         });
 

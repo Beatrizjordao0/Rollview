@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -52,6 +53,30 @@ public class AvaliacaoFilmeActivity extends AppCompatActivity {
         String titulo = getIntent().getStringExtra("titulo");
         String ano = getIntent().getStringExtra("ano");
         posterUrl = getIntent().getStringExtra("poster");
+        BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
+
+        // NAVBAR
+        bottomNav.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
+
+            if(id == R.id.nav_home) {
+                return true;
+            } else if(id == R.id.nav_profile){
+                Intent intent = new Intent(AvaliacaoFilmeActivity.this, PerfilActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+            } else if(id == R.id.nav_search){
+                Intent intent = new Intent(AvaliacaoFilmeActivity.this, SearchActivity.class);
+                startActivity(intent);
+                finish();
+            } else if(id == R.id.nav_list){
+                Intent intent = new Intent(AvaliacaoFilmeActivity.this, FavoriteActivity.class);
+                startActivity(intent);
+                finish();
+            }
+            return true;
+        });
 
         String dataAtual = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
                 .format(new Date());

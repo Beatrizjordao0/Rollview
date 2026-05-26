@@ -154,7 +154,11 @@ public class FilmeActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
                 return true;
-            }
+            } else if(id == R.id.nav_list){
+            Intent intent = new Intent(FilmeActivity.this, FavoriteActivity.class);
+            startActivity(intent);
+            finish();
+        }
             return false;
         });
 
