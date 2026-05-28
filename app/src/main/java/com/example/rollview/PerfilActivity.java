@@ -67,11 +67,9 @@ public class PerfilActivity extends AppCompatActivity {
 
         List<Avaliacao> listaAvaliacoes = Sessao.avaliacoes;
 
-        String nome =
-                getIntent().getStringExtra("nome");
+        String nome = getIntent().getStringExtra("nome");
 
-        String username =
-                getIntent().getStringExtra("username");
+        String username = getIntent().getStringExtra("username");
 
         if(nome == null){
             nome = "";
@@ -90,8 +88,7 @@ public class PerfilActivity extends AppCompatActivity {
 
         preencherPerfil(usuario);
 
-        AvaliacaoAdapter adapter =
-                new AvaliacaoAdapter(usuario.getAvaliacoes(), usuario);
+        AvaliacaoAdapter adapter = new AvaliacaoAdapter(usuario.getAvaliacoes(), usuario);
 
         recyclerAvaliacoes.setLayoutManager(
                 new LinearLayoutManager(this)

@@ -52,6 +52,19 @@ public class LoginActivity extends AppCompatActivity{
                                             Sessao.nomeUsuario = documentSnapshot.getString("nome");
                                             Sessao.username = documentSnapshot.getString("username");
 
+                                            db.collection("usuarios").document(userID).collection("favorites")
+                                                            .get()
+                                                            .addOnSuccessListener(queryDocumentSnapshots -> {
+                                                                Sessao.favorites.clear();
+
+                                                                for (com.google.firebase.firestore.DocumentSnapshot doc : queryDocumentSnapshots){
+                                                                    TMDBMovieResponse filmeSalvo = doc.toObject(TMDBMovieResponse.class);
+                                                                    if(filmeSalvo != null){
+                                                                        Sessao.favorites.add(filmeSalvo);
+                                                                    }
+                                                                }
+                                                            });
+
                                             Toast.makeText(LoginActivity.this, "Bem-vindo de volta!", Toast.LENGTH_SHORT).show();
 
                                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);

@@ -52,9 +52,7 @@ public class TMDBMovieResponse {
         return releaseDate;
     }
 
-    public double getVoteAverage() {
-        return voteAverage;
-    }
+    public double getVoteAverage() { return voteAverage; }
 
     public int getRuntime() {
         return runtime;
@@ -66,5 +64,9 @@ public class TMDBMovieResponse {
 
     public String getBackdropPath() {
         return backdropPath;
+    }
+
+    public void setVoteAverage(double voteAverage) {
+        this.voteAverage = voteAverage;
     }
 }

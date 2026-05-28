@@ -40,7 +40,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
             ano = movie.getReleaseDate().substring(0, 4);
         }
 
-        holder.txtFavInfo.setText("Lançamento: " + ano);
+        holder.txtFavInfo.setText(ano + "  |  Sua Nota: " + movie.getVoteAverage());
 
         if (movie.getPosterPath() != null) {
             String imageUrl = "https://image.tmdb.org/t/p/w500" + movie.getPosterPath();
