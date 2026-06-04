@@ -21,12 +21,12 @@
 
             <ImageButton
                 android:id="@+id/btnBack"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:background="@drawable/back_circle"
-                android:padding="10dp"
+                android:padding="12dp"
                 android:src="@android:drawable/ic_media_previous"
                 android:tint="#e9e9e9" />
 
@@ -39,18 +39,15 @@
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
-            <TextView
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSalvar"
-                android:layout_width="78dp"
-                android:layout_height="36dp"
+                android:layout_width="90dp"
+                android:layout_height="48dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:background="@drawable/pink_button"
-                android:gravity="center"
+                app:backgroundTint="#D96B9A"
                 android:text="Salvar"
-                android:textColor="#FFFFFF"
-                android:textSize="13sp"
-                android:textStyle="bold" />
+                android:textColor="#FFFFFF"/>
 
         </RelativeLayout>
 
@@ -170,7 +167,7 @@
         <EditText
             android:id="@+id/inputResenha"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="402dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:gravity="top"
@@ -181,28 +178,27 @@
             android:textColorHint="#BFC4CC"
             android:textSize="14sp" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#30343B" />
-
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
-        android:layout_width="340dp"
-        android:layout_height="70dp"
+        android:layout_width="280dp"
+        android:layout_height="53dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="13dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/navbar_rounded"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
         app:itemActiveIndicatorStyle="@null"
-        app:itemIconSize="20dp"
+        app:itemIconSize="14dp"
         app:itemIconTint="@android:color/black"
         app:itemTextColor="@android:color/black"
+        app:itemPaddingTop="7dp"
+        app:itemPaddingBottom="0dp"
         app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_menu" />
+        app:menu="@menu/bottom_menu"
+        app:itemTextAppearanceActive="@style/BottomNavText"
+        app:itemTextAppearanceInactive="@style/BottomNavText" />
 
 </RelativeLayout>

@@ -38,8 +38,7 @@ public class PerfilActivity extends AppCompatActivity {
 
         recyclerAvaliacoes = findViewById(R.id.recyclerAvaliacoes);
         BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
-
-        // Lógica dos Botões da NAVBAR
+        bottomNav.setSelectedItemId(R.id.nav_profile);
 
         bottomNav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
@@ -47,19 +46,19 @@ public class PerfilActivity extends AppCompatActivity {
             if (id == R.id.nav_profile){
                 return true;
             } else if (id == R.id.nav_home){
-                Intent intent = new Intent(PerfilActivity.this, HomeActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(PerfilActivity.this, HomeActivity.class));
                 finish();
                 return true;
             } else if (id == R.id.nav_search){
-                Intent intent = new Intent(PerfilActivity.this, SearchActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(PerfilActivity.this, SearchActivity.class));
                 finish();
+                return true;
             } else if(id == R.id.nav_list){
-            Intent intent = new Intent(PerfilActivity.this, FavoriteActivity.class);
-            startActivity(intent);
-            finish();
-        }
+                startActivity(new Intent(PerfilActivity.this, FavoriteActivity.class));
+                finish();
+                return true;
+            }
+
             return false;
         });
 
@@ -67,9 +66,8 @@ public class PerfilActivity extends AppCompatActivity {
 
         List<Avaliacao> listaAvaliacoes = Sessao.avaliacoes;
 
-        String nome = getIntent().getStringExtra("nome");
-
-        String username = getIntent().getStringExtra("username");
+        String nome = Sessao.nomeUsuario;
+        String username = Sessao.username;
 
         if(nome == null){
             nome = "";
@@ -95,6 +93,7 @@ public class PerfilActivity extends AppCompatActivity {
         );
 
         recyclerAvaliacoes.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
 

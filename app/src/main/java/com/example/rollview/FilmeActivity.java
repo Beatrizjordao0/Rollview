@@ -49,13 +49,10 @@ public class FilmeActivity extends AppCompatActivity {
     private CastAdapter castAdapter;
     private List<TMDBCast> listaAtoresGlobais = new ArrayList<>();
     private List<TMDBCast> listaDiretoresGlobais = new ArrayList<>();
-    private List<TMDBGender> listaGeneroGlobais = new ArrayList<>(); // Corrigido para TMDBGenre
+    private List<TMDBGender> listaGeneroGlobais = new ArrayList<>();
     private GenderAdapter genderAdapter;
 
-    // Variável global para guardar o filme atual e passar para o botão salvar
     private TMDBMovieResponse currentMovie;
-
-    // (Opcional) Método chamado direto do XML, caso você use onClick no layout
     public void abrirTelaAvaliacao(View view) {
         Intent intent = new Intent(FilmeActivity.this, AvaliacaoFilmeActivity.class);
         intent.putExtra("titulo", txtTitulo.getText().toString());
@@ -91,7 +88,6 @@ public class FilmeActivity extends AppCompatActivity {
         txtSinopse = findViewById(R.id.txtSinopse);
         ratingBar = findViewById(R.id.ratingBar);
 
-        // CORREÇÃO: Faltava o findViewById do RecyclerCast, o que causava erro ao abrir a tela
         recyclerCast = findViewById(R.id.recyclerCast);
 
         recyclerCast.setLayoutManager(new LinearLayoutManager(this));
@@ -115,7 +111,6 @@ public class FilmeActivity extends AppCompatActivity {
             tvGender.setTextColor(Color.WHITE);
         });
 
-        // CLIQUE NA DIREÇÃO
         tvDirection.setOnClickListener(v -> {
             if (castAdapter != null) {
                 recyclerCast.setAdapter(castAdapter);
@@ -127,7 +122,6 @@ public class FilmeActivity extends AppCompatActivity {
             tvGender.setTextColor(Color.WHITE);
         });
 
-        // CLIQUE NO GÊNERO
         tvGender.setOnClickListener(v -> {
             if (genderAdapter != null) recyclerCast.setAdapter(genderAdapter);
 
@@ -136,37 +130,43 @@ public class FilmeActivity extends AppCompatActivity {
             tvDirection.setTextColor(Color.WHITE); // Cor inativa
         });
 
-        // Logíca dos botões NAVBAR
         bottomNav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
 
             if (id == R.id.nav_home) {
                 Intent intent = new Intent(FilmeActivity.this, HomeActivity.class);
                 startActivity(intent);
-                return true;
-            } else if (id == R.id.nav_profile) {
-                Intent intent = new Intent(FilmeActivity.this, PerfilActivity.class);
-                startActivity(intent);
                 finish();
                 return true;
-            } else if (id == R.id.nav_search) {
+            }
+
+            if (id == R.id.nav_search) {
                 Intent intent = new Intent(FilmeActivity.this, SearchActivity.class);
                 startActivity(intent);
                 finish();
                 return true;
-            } else if(id == R.id.nav_list){
-            Intent intent = new Intent(FilmeActivity.this, FavoriteActivity.class);
-            startActivity(intent);
-            finish();
-        }
+            }
+
+            if (id == R.id.nav_list) {
+                Intent intent = new Intent(FilmeActivity.this, FavoriteActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+            }
+
+            if (id == R.id.nav_profile) {
+                Intent intent = new Intent(FilmeActivity.this, PerfilActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+            }
+
             return false;
         });
 
         btnBack.setOnClickListener(v -> finish());
 
-        // BLOCO DO BOTÃO AVALIAR CORRIGIDO E LIMPO
         btnAvaliar.setOnClickListener(v -> {
-            // Guarda o filme completo na Sessão para a próxima tela usar
             if (currentMovie != null) {
                 Sessao.filmeAtual = currentMovie;
             }
@@ -254,9 +254,7 @@ public class FilmeActivity extends AppCompatActivity {
         });
     }
 
-    // Usando a palavra "movie" como você pediu
     private void preencherTela(TMDBMovieResponse movie) {
-        // Salva na variável global para o botão Avaliar conseguir acessar
         this.currentMovie = movie;
 
         txtTitulo.setText(movie.getTitle());

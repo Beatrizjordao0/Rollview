@@ -57,7 +57,10 @@
         android:layout_marginTop="10dp"
         android:isIndicator="true"
         android:numStars="5"
-        android:stepSize="0.5" />
+        android:stepSize="0.5"
+        android:progressTint="#FFD54F"
+        android:progressBackgroundTint="#5A5A5A"
+        android:secondaryProgressTint="#FFD54F"/>
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import com.bumptech.glide.Glide;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -46,9 +47,10 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.View
         if(usuario.getFotoPerfil() != null){
             holder.imgPerfilReview.setImageURI(usuario.getFotoPerfil());
         }
-
         if(avaliacao.getPosterFilme() != null){
-            holder.imgPoster.setImageURI(avaliacao.getPosterFilme());
+            Glide.with(holder.itemView.getContext())
+                    .load(avaliacao.getPosterFilme().toString())
+                    .into(holder.imgPoster);
         }
     }
 

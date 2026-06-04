@@ -68,37 +68,40 @@ public class HomeActivity extends AppCompatActivity {
         viewPagerShowcase = findViewById(R.id.viewPagerShowcase);
         showcaseAdapter = new ShowcaseAdapter(movieList);
         viewPagerShowcase.setAdapter(showcaseAdapter);
+
+
         BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
-
-        // Chama a API
-        fetchMoviesFromApi();
-
-
-
-        // Lógica dos Botões do NavBar
+        bottomNav.setSelectedItemId(R.id.nav_home);
 
         bottomNav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
 
-            if(id == R.id.nav_home) {
+            if (id == R.id.nav_home) {
                 return true;
-            } else if(id == R.id.nav_profile){
-                Intent intent = new Intent(HomeActivity.this, PerfilActivity.class);
-                startActivity(intent);
-                finish();
-                return true;
-            } else if(id == R.id.nav_search){
-                Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
-                startActivity(intent);
-                finish();
-            } else if(id == R.id.nav_list){
-                Intent intent = new Intent(HomeActivity.this, FavoriteActivity.class);
-                startActivity(intent);
-                finish();
             }
-            return true;
+
+            if (id == R.id.nav_profile) {
+                startActivity(new Intent(HomeActivity.this, PerfilActivity.class));
+                finish();
+                return true;
+            }
+
+            if (id == R.id.nav_search) {
+                startActivity(new Intent(HomeActivity.this, SearchActivity.class));
+                finish();
+                return true;
+            }
+
+            if (id == R.id.nav_list) {
+                startActivity(new Intent(HomeActivity.this, FavoriteActivity.class));
+                finish();
+                return true;
+            }
+
+            return false;
         });
 
+        fetchMoviesFromApi();
     }
 
     private void fetchMoviesFromApi() {

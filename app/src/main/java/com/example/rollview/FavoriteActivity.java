@@ -23,28 +23,30 @@ public class FavoriteActivity extends AppCompatActivity {
 
         recyclerFavorites = findViewById(R.id.recyclerFavorites);
         txtContagem = findViewById(R.id.txtContagem);
-        BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
 
-        recyclerFavorites.setLayoutManager(new LinearLayoutManager(this));
+        BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
 
         bottomNav.setSelectedItemId(R.id.nav_list);
 
         bottomNav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
 
-            if (id == R.id.nav_home) {
+            if(id == R.id.nav_home) {
                 startActivity(new Intent(FavoriteActivity.this, HomeActivity.class));
                 finish();
                 return true;
-            } else if (id == R.id.nav_search) {
-                startActivity(new Intent(FavoriteActivity.this, SearchActivity.class));
-                finish();
-                return true;
-            } else if (id == R.id.nav_profile) {
+            } else if(id == R.id.nav_profile){
                 startActivity(new Intent(FavoriteActivity.this, PerfilActivity.class));
                 finish();
                 return true;
+            } else if(id == R.id.nav_search){
+                startActivity(new Intent(FavoriteActivity.this, SearchActivity.class));
+                finish();
+                return true;
+            } else if(id == R.id.nav_list){
+                return true;
             }
+
             return false;
         });
     }
@@ -52,6 +54,8 @@ public class FavoriteActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        recyclerFavorites.setLayoutManager(new LinearLayoutManager(this));
 
         adapter = new FavoriteAdapter(Sessao.favorites);
         recyclerFavorites.setAdapter(adapter);

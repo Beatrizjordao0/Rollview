@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,7 +23,7 @@ import java.util.Locale;
 public class AvaliacaoFilmeActivity extends AppCompatActivity {
 
     ImageButton btnBack;
-    TextView btnSalvar;
+    Button btnSalvar;
     ImageView imgPoster;
 
     TextView txtTitulo;
@@ -54,29 +55,32 @@ public class AvaliacaoFilmeActivity extends AppCompatActivity {
         String titulo = getIntent().getStringExtra("titulo");
         String ano = getIntent().getStringExtra("ano");
         posterUrl = getIntent().getStringExtra("poster");
+
+
         BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
 
-        // NAVBAR
         bottomNav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
 
             if(id == R.id.nav_home) {
+                startActivity(new Intent(AvaliacaoFilmeActivity.this, HomeActivity.class));
+                finish();
                 return true;
             } else if(id == R.id.nav_profile){
-                Intent intent = new Intent(AvaliacaoFilmeActivity.this, PerfilActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(AvaliacaoFilmeActivity.this, PerfilActivity.class));
                 finish();
                 return true;
             } else if(id == R.id.nav_search){
-                Intent intent = new Intent(AvaliacaoFilmeActivity.this, SearchActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(AvaliacaoFilmeActivity.this, SearchActivity.class));
                 finish();
+                return true;
             } else if(id == R.id.nav_list){
-                Intent intent = new Intent(AvaliacaoFilmeActivity.this, FavoriteActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(AvaliacaoFilmeActivity.this, FavoriteActivity.class));
                 finish();
+                return true;
             }
-            return true;
+
+            return false;
         });
 
         String dataAtual = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
@@ -93,16 +97,6 @@ public class AvaliacaoFilmeActivity extends AppCompatActivity {
         btnBack.setOnClickListener(v -> finish());
 
         btnSalvar.setOnClickListener(v -> {
-            com.google.firebase.auth.FirebaseAuth auth = com.google.firebase.auth.FirebaseAuth.getInstance();
-            com.google.firebase.firestore.FirebaseFirestore db = com.google.firebase.firestore.FirebaseFirestore.getInstance();
-
-            if (auth.getCurrentUser() == null){
-                android.widget.Toast.makeText(AvaliacaoFilmeActivity.this, "Faça o login para salvar seu filmes favoritos!", Toast.LENGTH_LONG).show();
-                return;
-            }
-
-            String userID = auth.getCurrentUser().getUid();
-
             String texto = inputResenha.getText().toString().trim();
             float nota = ratingBar.getRating();
             String data = inputData.getText().toString().trim();
@@ -116,39 +110,19 @@ public class AvaliacaoFilmeActivity extends AppCompatActivity {
 
             Sessao.avaliacoes.add(0, avaliacao);
 
-            java.util.Map<String, Object> avaliacaoFirebase = new java.util.HashMap<>();
-            avaliacaoFirebase.put("data", data);
-            avaliacaoFirebase.put("texto", texto);
-            avaliacaoFirebase.put("nota", nota);
-            avaliacaoFirebase.put("posterUrl", posterUrl);
-
-            if(Sessao.filmeAtual != null){
-                avaliacaoFirebase.put("filmeId", Sessao.filmeAtual.getId());
-                avaliacaoFirebase.put("filmeTitulo", Sessao.filmeAtual.getTitle());
-            }
-
-            String reviewId = Sessao.filmeAtual != null ? String.valueOf(Sessao.filmeAtual.getId()) : String.valueOf(System.currentTimeMillis());
-            db.collection("usuarios").document(userID)
-                    .collection("avaliacoes").document(reviewId)
-                    .set(avaliacaoFirebase);
-
             if (Sessao.filmeAtual != null) {
                 boolean jaSalvo = false;
+
                 for (TMDBMovieResponse f : Sessao.favorites) {
                     if (f.getId() == Sessao.filmeAtual.getId()) {
                         jaSalvo = true;
                         break;
                     }
                 }
+
                 if (!jaSalvo) {
-
                     Sessao.filmeAtual.setVoteAverage(nota);
-
-                    Sessao.favorites.add(Sessao.filmeAtual);
-
-                    db.collection("usuarios").document(userID)
-                            .collection("favorites").document(String.valueOf(Sessao.filmeAtual.getId()))
-                            .set(Sessao.filmeAtual);
+                    Sessao.favorites.add(0,Sessao.filmeAtual);
                 }
             }
 
