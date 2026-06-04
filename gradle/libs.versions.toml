@@ -7,9 +7,10 @@ appcompat = "1.6.1"
 material = "1.10.0"
 activityKtx = "1.8.0"
 constraintlayout = "2.1.4"
-firebaseAuth = "23.1.0"
-firebaseFirestore = "25.1.1"
 googleServices = "4.4.2"
+googleGmsGoogleServices = "4.4.4"
+firebaseAuth = "24.1.0"
+firebaseFirestore = "26.3.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -24,5 +25,5 @@ firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
+google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
 

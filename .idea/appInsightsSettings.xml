@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.example.rollview" />
+                  <option name="mobileSdkAppId" value="1:944103332028:android:8caa1716a7bd014bd118b9" />
+                  <option name="projectId" value="rollview-7a0d0" />
+                  <option name="projectNumber" value="944103332028" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
