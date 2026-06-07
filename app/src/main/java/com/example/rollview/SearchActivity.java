@@ -48,7 +48,7 @@ public class SearchActivity extends AppCompatActivity {
         movieAdapter = new MovieAdapter(listMovies);
         recyclerSearch.setAdapter(movieAdapter);
 
-        BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
+        BottomNavigationView bottomNav = findViewById(R.id.navbar);
         bottomNav.setSelectedItemId(R.id.nav_search);
 
         bottomNav.setOnItemSelectedListener(item -> {

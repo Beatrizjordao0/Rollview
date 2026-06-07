@@ -88,26 +88,11 @@
 
     </LinearLayout>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNav"
-        android:layout_width="280dp"
-        android:layout_height="53dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/navbar_rounded"
-        android:paddingTop="0dp"
-        android:paddingBottom="0dp"
-        app:itemActiveIndicatorStyle="@null"
-        app:itemIconSize="14dp"
-        app:itemIconTint="@android:color/black"
-        app:itemTextColor="@android:color/black"
-        app:itemPaddingTop="7dp"
-        app:itemPaddingBottom="0dp"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_menu"
-        app:itemTextAppearanceActive="@style/BottomNavText"
-        app:itemTextAppearanceInactive="@style/BottomNavText" />
+    <include
+        layout="@layout/navbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"/>
 
 
 </RelativeLayout>

@@ -94,7 +94,8 @@ public class FilmeActivity extends AppCompatActivity {
         castAdapter = new CastAdapter(listaAtoresGlobais);
         recyclerCast.setAdapter(castAdapter);
 
-        BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
+        BottomNavigationView bottomNav = findViewById(R.id.navbar);
+        bottomNav.getMenu().setGroupCheckable(0, true, false);
 
         TextView tvCast = findViewById(R.id.tabCast);
         TextView tvDirection = findViewById(R.id.tabDirection);

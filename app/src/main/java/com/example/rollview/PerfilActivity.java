@@ -37,7 +37,7 @@ public class PerfilActivity extends AppCompatActivity {
         txtUsername = findViewById(R.id.txtUsername);
 
         recyclerAvaliacoes = findViewById(R.id.recyclerAvaliacoes);
-        BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
+        BottomNavigationView bottomNav = findViewById(R.id.navbar);
         bottomNav.setSelectedItemId(R.id.nav_profile);
 
         bottomNav.setOnItemSelectedListener(item -> {

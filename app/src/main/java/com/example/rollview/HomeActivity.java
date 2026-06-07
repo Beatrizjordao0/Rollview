@@ -70,7 +70,7 @@ public class HomeActivity extends AppCompatActivity {
         viewPagerShowcase.setAdapter(showcaseAdapter);
 
 
-        BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
+        BottomNavigationView bottomNav = findViewById(R.id.navbar);
         bottomNav.setSelectedItemId(R.id.nav_home);
 
         bottomNav.setOnItemSelectedListener(item -> {

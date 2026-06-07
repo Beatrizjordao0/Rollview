@@ -42,34 +42,19 @@
         android:paddingHorizontal="16dp"
         android:clipToPadding="false"
         app:layout_constraintTop_toBottomOf="@id/headerContainer"
-        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        app:layout_constraintBottom_toTopOf="@id/navbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:listitem="@layout/item_favorite" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNav"
-        android:layout_width="280dp"
-        android:layout_height="53dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/navbar_rounded"
-        android:paddingTop="0dp"
-        android:paddingBottom="0dp"
-        app:itemActiveIndicatorStyle="@null"
-        app:itemIconSize="14dp"
-        app:itemIconTint="@android:color/black"
-        app:itemTextColor="@android:color/black"
-        app:itemPaddingTop="7dp"
-        app:itemPaddingBottom="0dp"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_menu"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <include
+        android:id="@+id/navbar"
+        layout="@layout/navbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:itemTextAppearanceActive="@style/BottomNavText"
-        app:itemTextAppearanceInactive="@style/BottomNavText" />
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
