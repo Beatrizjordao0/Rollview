@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottomNav"
+        android:layout_above="@id/navbar"
         android:orientation="vertical">
 
         <FrameLayout
@@ -23,7 +23,7 @@
                 android:layout_height="190dp"
                 android:alpha="0.34"
                 android:scaleType="centerCrop"
-                android:src="@drawable/user_default" />
+                android:src="@drawable/user_default" /> <!-- Nesse image usar banco, mesma foto do perfil vai ser aqui, mas desvanecida -->
 
             <View
                 android:layout_width="match_parent"
@@ -38,7 +38,7 @@
                 android:layout_marginTop="22dp"
                 android:layout_marginEnd="22dp"
                 android:src="@android:drawable/ic_menu_preferences"
-                app:tint="#944264" />
+                app:tint="#944264" /> <!-- Ferramenta para alterar foto de perfil -->
 
             <ImageView
                 android:id="@+id/imgPerfil"
@@ -92,7 +92,5 @@
         layout="@layout/navbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"/>
-
-
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>

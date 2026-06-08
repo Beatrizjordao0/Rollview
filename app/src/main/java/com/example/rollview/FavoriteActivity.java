@@ -24,7 +24,7 @@ public class FavoriteActivity extends AppCompatActivity {
         recyclerFavorites = findViewById(R.id.recyclerFavorites);
         txtContagem = findViewById(R.id.txtContagem);
 
-        BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
+        BottomNavigationView bottomNav = findViewById(R.id.navbar);
 
         bottomNav.setSelectedItemId(R.id.nav_list);
 

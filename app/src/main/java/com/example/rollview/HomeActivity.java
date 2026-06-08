@@ -3,9 +3,6 @@ package com.example.rollview;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler; // Importação para o cronômetro
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -57,7 +54,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home);
+        setContentView(R.layout.activity_home);
 
         // Lista Horizontal de Baixo
         recyclerView = findViewById(R.id.trendingMovies);

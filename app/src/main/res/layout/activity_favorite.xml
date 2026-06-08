@@ -31,7 +31,7 @@
             android:text="0 filmes salvos"
             android:textColor="#E05C97"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textStyle="bold" /> <!-- Nesse texto usar banco -->
 
     </LinearLayout>
 

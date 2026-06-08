@@ -57,7 +57,7 @@ public class AvaliacaoFilmeActivity extends AppCompatActivity {
         posterUrl = getIntent().getStringExtra("poster");
 
 
-        BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
+        BottomNavigationView bottomNav = findViewById(R.id.navbar);
 
         bottomNav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
