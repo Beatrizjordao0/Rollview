@@ -34,8 +34,21 @@ public class MainActivity extends AppCompatActivity {
 
         // Função
         skipButton.setOnClickListener(v -> {
+            com.google.firebase.auth.FirebaseAuth.getInstance().signOut();
+            Sessao.nomeUsuario = "Visitante";
+            Sessao.username = "@visitante";
+            Sessao.filmeAtual = null;
+
+            if(Sessao.favorites != null){
+                Sessao.favorites.clear();
+            }
+            if(Sessao.avaliacoes != null){
+                Sessao.avaliacoes.clear();
+            }
+
             Intent intent = new Intent(MainActivity.this, HomeActivity.class);
             startActivity(intent);
+            finish();
         });
 
         buttonLogin.setOnClickListener(v -> {

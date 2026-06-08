@@ -97,18 +97,42 @@ public class AvaliacaoFilmeActivity extends AppCompatActivity {
         btnBack.setOnClickListener(v -> finish());
 
         btnSalvar.setOnClickListener(v -> {
+            com.google.firebase.auth.FirebaseAuth auth = com.google.firebase.auth.FirebaseAuth.getInstance();
+            com.google.firebase.firestore.FirebaseFirestore db = com.google.firebase.firestore.FirebaseFirestore.getInstance();
+
+            if (auth.getCurrentUser() == null){
+                android.widget.Toast.makeText(AvaliacaoFilmeActivity.this, "Faça o login para conseguir salvar seus Filmes Favoritos!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            String userID = auth.getCurrentUser().getUid();
+
             String texto = inputResenha.getText().toString().trim();
             float nota = ratingBar.getRating();
             String data = inputData.getText().toString().trim();
 
-            Avaliacao avaliacao = new Avaliacao(
-                    data,
-                    texto,
-                    nota,
-                    posterUrl != null && !posterUrl.isEmpty() ? Uri.parse(posterUrl) : null
-            );
+            Avaliacao avaliacao = new Avaliacao(data, texto, nota, posterUrl != null && !posterUrl.isEmpty() ? Uri.parse(posterUrl) : null);
 
             Sessao.avaliacoes.add(0, avaliacao);
+
+            java.util.Map<String, Object> avaliacaoFirebase = new java.util.HashMap<>();
+            avaliacaoFirebase.put("data", data);
+            avaliacaoFirebase.put("texto", texto);
+            avaliacaoFirebase.put("nota", nota);
+            avaliacaoFirebase.put("posterUrl", posterUrl);
+
+            if(Sessao.filmeAtual != null){
+                avaliacaoFirebase.put("filmeId", Sessao.filmeAtual.getId());
+                avaliacaoFirebase.put("filmeTitulo", Sessao.filmeAtual.getTitle());
+            }
+
+            String reviewId = Sessao.filmeAtual != null ? String.valueOf(Sessao.filmeAtual.getId()) : String.valueOf(System.currentTimeMillis());
+
+            db.collection("usuarios").document(userID)
+                    .collection("avaliacoes").document(reviewId)
+                    .set(avaliacaoFirebase);
+
+
 
             if (Sessao.filmeAtual != null) {
                 boolean jaSalvo = false;
@@ -123,6 +147,10 @@ public class AvaliacaoFilmeActivity extends AppCompatActivity {
                 if (!jaSalvo) {
                     Sessao.filmeAtual.setVoteAverage(nota);
                     Sessao.favorites.add(0,Sessao.filmeAtual);
+
+                    db.collection("usuarios").document(userID)
+                            .collection("favorites").document(String.valueOf(Sessao.filmeAtual.getId()))
+                            .set(Sessao.filmeAtual);
                 }
             }
 

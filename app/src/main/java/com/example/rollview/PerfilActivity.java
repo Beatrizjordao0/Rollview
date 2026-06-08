@@ -19,10 +19,9 @@ public class PerfilActivity extends AppCompatActivity {
 
     ImageView imgPerfil;
     ImageView imgBackground;
-
     TextView txtNome;
     TextView txtUsername;
-
+    private AvaliacaoAdapter adapter;
     RecyclerView recyclerAvaliacoes;
 
     @Override
@@ -86,7 +85,7 @@ public class PerfilActivity extends AppCompatActivity {
 
         preencherPerfil(usuario);
 
-        AvaliacaoAdapter adapter = new AvaliacaoAdapter(usuario.getAvaliacoes(), usuario);
+        adapter = new AvaliacaoAdapter(usuario.getAvaliacoes(), usuario);
 
         recyclerAvaliacoes.setLayoutManager(
                 new LinearLayoutManager(this)
@@ -94,10 +93,9 @@ public class PerfilActivity extends AppCompatActivity {
 
         recyclerAvaliacoes.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        carregarAvaliacoesDoFirebase();
+
     }
-
-
-
     private void preencherPerfil(Usuario usuario){
 
         txtNome.setText(usuario.getNome());
@@ -106,6 +104,42 @@ public class PerfilActivity extends AppCompatActivity {
         if(usuario.getFotoPerfil() != null){
             imgPerfil.setImageURI(usuario.getFotoPerfil());
             imgBackground.setImageURI(usuario.getFotoPerfil());
+        }
+    }
+
+    private void carregarAvaliacoesDoFirebase(){
+        com.google.firebase.auth.FirebaseAuth auth = com.google.firebase.auth.FirebaseAuth.getInstance();
+        com.google.firebase.firestore.FirebaseFirestore db = com.google.firebase.firestore.FirebaseFirestore.getInstance();
+
+        if(auth.getCurrentUser() != null){
+            String userID = auth.getCurrentUser().getUid();
+            db.collection("usuarios").document(userID).collection("avaliacoes")
+                    .get()
+                    .addOnSuccessListener(queryDocumentSnapshots -> {
+                        Sessao.avaliacoes.clear();
+                       for (com.google.firebase.firestore.QueryDocumentSnapshot doc : queryDocumentSnapshots){
+                           String data = doc.getString("data");
+                           String texto = doc.getString("texto");
+                           String poster = doc.getString("posterUrl");
+                           Double notaDouble = doc.getDouble("nota");
+                           float nota = (notaDouble != null) ? notaDouble.floatValue() : 0f;
+
+                           Avaliacao avaliacao = new Avaliacao(
+                                   data != null ? data : "",
+                                   texto != null ? texto : "",
+                                   nota,
+                                   poster != null && !poster.isEmpty() ? android.net.Uri.parse(poster) : null
+                           );
+
+                           Sessao.avaliacoes.add(avaliacao);
+                       }
+
+                       if(adapter != null){
+                           adapter.notifyDataSetChanged();
+                       }
+
+
+                    });
         }
     }
 }
