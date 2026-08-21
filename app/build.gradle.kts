@@ -1,9 +1,9 @@
-val tmdbApiKey = System.getenv("TMDB_API_KEY") ?: ""
-
 plugins {
     alias(libs.plugins.android.application)
     id("com.google.gms.google-services")
 }
+
+val tmdbApiKey = System.getenv("TMDB_API_KEY") ?: ""
 
 android {
     namespace = "com.example.rollview"
