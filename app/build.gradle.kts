@@ -3,6 +3,8 @@ plugins {
     id("com.google.gms.google-services")
 }
 
+val tmdbApiKey = System.getenv("TMDB_API_KEY") ?: ""
+
 android {
     namespace = "com.example.rollview"
     compileSdk = 36
@@ -15,6 +17,11 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "TMDB_API_KEY", "\"$tmdbApiKey\"")
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 }
 

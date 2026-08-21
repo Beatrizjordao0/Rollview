@@ -31,7 +31,7 @@ public class SearchActivity extends AppCompatActivity {
     private MovieAdapter movieAdapter;
     private List<Movie> listMovies = new ArrayList<>();
 
-    private static final String API_KEY = "290f87fc1ed22d42148dd9fef3dc8e7b";
+    private static final String API_KEY = BuildConfig.TMDB_API_KEY;
     private static final String BASE_URL = "https://api.themoviedb.org/3/";
 
     @Override
