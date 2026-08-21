@@ -1,3 +1,5 @@
+val tmdbApiKey = System.getenv("TMDB_API_KEY") ?: ""
+
 plugins {
     alias(libs.plugins.android.application)
     id("com.google.gms.google-services")
@@ -15,6 +17,11 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "TMDB_API_KEY", "\"$tmdbApiKey\"")
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 }
 

@@ -31,7 +31,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FilmeActivity extends AppCompatActivity {
 
-    private static final String API_KEY = "290f87fc1ed22d42148dd9fef3dc8e7b";
+    private static final String API_KEY = BuildConfig.TMDB_API_KEY;
     private static final String BASE_URL = "https://api.themoviedb.org/3/";
     private static final String IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
